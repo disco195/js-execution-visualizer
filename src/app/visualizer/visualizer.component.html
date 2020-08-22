@@ -1,41 +1,28 @@
 <div class="layout">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="../../assets/code-snippets/promises.png">
-        </div>
-        <div class="col">
-            <table class="table table-striped table-bordered table-hover" *ngIf='displayBlockNumber === 1'>
-                <tbody>
-                    <tr>
-                        <th scope="row">{{rowTitles.taskQueue}}</th>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">{{rowTitles.microTaskQueue}}</th>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">{{rowTitles.webApis}}</th>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">{{rowTitles.callStack}}</th>
-                        <td colspan="2">console.log("Here I am");</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">{{rowTitles.console}}</th>
-                        <td colspan="2">Here I am</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="row">
+    <div *ngIf="imageSrc" class="col-md-6">
+      <img [src]="imageSrc">
     </div>
+    <div class="col">
+      <table class="table table-striped table-bordered table-hover" *ngIf='example'>
+        <tbody>
+          <tr *ngFor="let key of rowKeys; let index;">
+            <th scope="row">{{rowTitles[key]}}</th>
+            <td colspan="2">
+              <div class="chip" *ngFor="let i of example[key]">
+                {{i}}
+              </div>
+            </td>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-    <button type="button" class="btn btn-dark" (click)="incrementDisplayBlockNumber()"
-        *ngIf="displayBlockNumber === 0">Start</button>
-    <button type="button" class="btn btn-dark" (click)="decrementDisplayBlockNumber()"
-        *ngIf="displayBlockNumber > 0">Back</button>
-    <button type="button" class="btn btn-dark" (click)="incrementDisplayBlockNumber()"
-        *ngIf="displayBlockNumber > 0">Next</button>
+  <button type="button" class="btn btn-dark" (click)="incrementDisplayBlockNumber()"
+    *ngIf="displayBlockNumber === 0">Start</button>
+  <button type="button" class="btn btn-dark" (click)="decrementDisplayBlockNumber()"
+    *ngIf="displayBlockNumber > 0">Back</button>
+  <button type="button" class="btn btn-dark" (click)="incrementDisplayBlockNumber()"
+    *ngIf="displayBlockNumber !== 0 && displayBlockNumber < this.allExamples.length - 1 ">Next</button>
 
 </div>
