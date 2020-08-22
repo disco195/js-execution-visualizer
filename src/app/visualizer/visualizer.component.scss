@@ -1,18 +1,29 @@
-.layout{
-padding: 10px;
+.layout {
+  padding: 10px;
 }
 .col-md-6 {
-    flex: 0 0 auto;
-    width: 43%;
+  flex: 0 0 auto;
+  width: 50%;
+  overflow: auto;
+  border: 1px solid black;
 }
-.table{
-    width: 80%;
+.table {
+  width: 80%;
 }
 img {
-    width: 100%;
-    height: 701px;
-    border: dashed;
-    border-color: rgb(24, 40, 83);
+  width: 100%;
+  height: 701px;
+  border: dashed;
+  border-color: rgb(24, 40, 83);
+}
+
+pre {
+  margin: 0;
+  padding: 0;
+  border: none;
+  height: 22px;
+  font-size: 16px;
+  overflow: hidden;
 }
 
 .chip {
