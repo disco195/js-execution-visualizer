@@ -62,4 +62,9 @@ export class VisualizerComponent implements OnInit {
     this.codeLines = VISUALISATION_EXAMPLES[this.exampleId].codeLines;
   }
 
+  getChipClassToApply(index): string {
+    console.log('index', index)
+    return `chip-${index}`;
+  }
+
 }

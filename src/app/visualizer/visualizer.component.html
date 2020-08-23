@@ -4,30 +4,30 @@
       <img [src]="imageSrc">
     </div> -->
     <div class="col-md-6">
-      <pre *ngFor="let line of codeLines;" [ngStyle]="{'background-color': shouldHighlightRow(line) ? 'aquamarine' : ''}" class="prettyprint lang-js">
+      <pre *ngFor="let line of codeLines;" [ngStyle]="{'background-color': shouldHighlightRow(line) ? '#abecff' : ''}"
+        class="prettyprint lang-js">
         {{line}}
       </pre>
     </div>
     <div class="col">
-      <table class="table table-striped table-bordered table-hover" *ngIf='example'>
+
+      <button type="button" class="btn btn-dark" style="margin-left: 100px;" (click)="incrementDisplayBlockNumber()"
+        *ngIf="displayBlockNumber === 0">Start</button>
+      <button type="button" class="btn btn-dark" style="margin-left: 100px;" (click)="decrementDisplayBlockNumber()"
+        *ngIf="displayBlockNumber > 0">Back</button>
+      <button type="button" class="btn btn-dark" style="margin-left: 10px;" (click)="incrementDisplayBlockNumber()"
+        *ngIf="displayBlockNumber !== 0 && displayBlockNumber < this.allExamples.length - 1 ">Next</button>
+
+      <table class="table table-bordered" *ngIf='example'>
         <tbody>
-          <tr *ngFor="let key of rowKeys; let index;">
+          <tr *ngFor="let key of rowKeys; let i = index;">
             <th scope="row">{{rowTitles[key]}}</th>
-            <td colspan="2">
-              <div class="chip" *ngFor="let i of example[key]">
-                {{i}}
-              </div>
-            </td>
+            <div [ngClass]="getChipClassToApply(i)"   *ngFor="let x of example[key]">
+              <td colspan="2">{{x}}</td>
+            </div>
+          </tr>
         </tbody>
       </table>
     </div>
   </div>
-
-  <button type="button" class="btn btn-dark" (click)="incrementDisplayBlockNumber()"
-    *ngIf="displayBlockNumber === 0">Start</button>
-  <button type="button" class="btn btn-dark" (click)="decrementDisplayBlockNumber()"
-    *ngIf="displayBlockNumber > 0">Back</button>
-  <button type="button" class="btn btn-dark" (click)="incrementDisplayBlockNumber()"
-    *ngIf="displayBlockNumber !== 0 && displayBlockNumber < this.allExamples.length - 1 ">Next</button>
-
 </div>
