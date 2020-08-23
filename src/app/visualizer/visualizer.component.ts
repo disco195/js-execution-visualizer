@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ROW_TITLES, VISUALISATION_EXAMPLES } from './visualizer.constants';
 
@@ -17,7 +17,6 @@ export class VisualizerComponent implements OnInit {
   public allExamples = [];
   public codeLines = [];
   public rowKeys = Object.keys(ROW_TITLES);
-  @ViewChild('pre') private preRef: ElementRef<HTMLElement>;
   constructor(private readonly route: ActivatedRoute) {
     this.route.params.subscribe(param => {
       if (param['example-id']) {
@@ -39,15 +38,16 @@ export class VisualizerComponent implements OnInit {
     this.imageSrc = VISUALISATION_EXAMPLES[this.exampleId].imageSrc;
   }
 
-  getChipClass(i: number): string {
-    return i % 2 === 0 ? 'aqua-marine' : 'darksea-green';
+  shouldShowSpinner(x: string): boolean {
+    return x.toLowerCase().includes('pending');
+  }
+
+  shouldShowSpinnerDone(x: string): boolean {
+    return x.toLowerCase().includes('resolved');
   }
 
   shouldHighlightRow(row: string): boolean {
-    if (!this.example.highlightKey) {
-      return false;
-    }
-    return Number(row.split('.')[0]) === this.example.highlightKey;
+    return row.startsWith(this.example.highlightKey + '.');
   }
 
   incrementDisplayBlockNumber(): void {
@@ -62,8 +62,7 @@ export class VisualizerComponent implements OnInit {
     this.codeLines = VISUALISATION_EXAMPLES[this.exampleId].codeLines;
   }
 
-  getChipClassToApply(index): string {
-    console.log('index', index)
+  getChipClassToApply(index, key, ix): string {
     return `chip-${index}`;
   }
 
